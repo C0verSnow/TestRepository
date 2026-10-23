@@ -1,0 +1,24 @@
+name: Check test.md
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-test-file:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify required file content
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          actual = Path("test.md").read_bytes()
+          if actual != b"test done\n":
+              raise SystemExit("test.md must contain exactly 'test done' followed by a newline")
+          print("test.md content verified")
+          PY
