@@ -1,0 +1,16 @@
+name: 检查任务文件
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 检查 tgtest.md 的完整内容
+        shell: bash
+        run: |
+          printf 'tg test done\n' > "$RUNNER_TEMP/expected-tgtest.md"
+          diff -u "$RUNNER_TEMP/expected-tgtest.md" tgtest.md
