@@ -12,5 +12,5 @@ jobs:
       - name: 检查 tgtest.md 的完整内容
         shell: bash
         run: |
-          printf 'tg test done\n' > "$RUNNER_TEMP/expected-tgtest.md"
+          printf 'tg test success\n' > "$RUNNER_TEMP/expected-tgtest.md"
           diff -u "$RUNNER_TEMP/expected-tgtest.md" tgtest.md
