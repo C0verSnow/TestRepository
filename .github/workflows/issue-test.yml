@@ -1,0 +1,19 @@
+name: Issue test content
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-issue-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Check Issuetest.md content
+        shell: bash
+        run: printf 'issue test done\n' | cmp - Issuetest.md
